@@ -1,0 +1,18 @@
+:root {
+  color-scheme: dark;
+  --header-bg: hsl(267, 99%, 38%);
+  --header-image: url('/images/bg-mobile-dark.jpg');
+  --toggle-icon: url('/images/icon-sun.svg');
+  --shadow: hsla(0, 0, 0, .5);
+  --body-bg: var(--neutral-235-dark);
+  --item-bg: var(--neutral-235-medium);
+  --checkbox: var(--neutral-237-medium);
+  --text-primary: var(--neutral-234-light);
+  --text-secondary: var(--neutral-234-dark);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-image: url('/images/bg-desktop-dark.jpg');
+  }
+}

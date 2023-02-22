@@ -4,10 +4,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="stylesheet" href="./styles/style.css" />
+  <link rel="stylesheet" href="./styles/dark-theme.css" media="(prefers-color-scheme: dark)" />
   <script defer src="./scripts/script.js"></script>
   <title>Frontend Mentor | Todo App</title>
 </head>
 <body class="page">
-  Todo app
+  <header class="page__header header">
+    <div class="header__container">
+      <h1 class="header__logo">Todo</h1>
+      <button class="header__theme-toggle" type="button">
+        <span class="visually-hidden">Change theme</span>
+      </button>
+      <form class="header__form" action="#" method="post" novalidate>
+        <input
+          class="header__input"
+          type="text"
+          name="new-task"
+          id="new-task"
+          placeholder="Create a new todo…"
+          autocomplete="off"
+        >
+      </form>
+    </div>
+  </header>
 </body>
 </html>

@@ -1,7 +1,24 @@
-/* Fonts */
-
 @import './fonts.css';
+@import './light-theme.css';
 
-/* Variables */
+@import './components/box-sizing.css';
+@import './components/visually-hidden.css';
+@import './components/page.css';
+@import './components/header.css';
 
-:root {}
+:root {
+  color-scheme: light dark;
+  --primary-blue: hsl(220, 98%, 61%);
+  --gradient: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+  --neutral-white: hsl(0, 0%, 98%);
+  --neutral-233-light: hsl(233, 11%, 84%);
+  --neutral-233-dark: hsl(233, 14%, 35%);
+  --neutral-234-light: hsl(234, 39%, 85%);
+  --neutral-234-dark: hsl(234, 11%, 52%);
+  --neutral-235-light: hsl(235, 19%, 35%);
+  --neutral-235-medium: hsl(235, 24%, 19%);
+  --neutral-235-dark: hsl(235, 21%, 11%);
+  --neutral-236-light: hsl(236, 33%, 92%);
+  --neutral-236-dark: hsl(236, 9%, 61%);
+  --neutral-237-medium: hsl(237, 14%, 26%);
+}

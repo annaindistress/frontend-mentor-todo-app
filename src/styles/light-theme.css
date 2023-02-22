@@ -1,0 +1,19 @@
+:root {
+  color-scheme: light;
+  --header-bg: hsl(249, 99%, 64%);
+  --header-image: url('/images/bg-mobile-light.jpg');
+  --toggle-icon: url('/images/icon-moon.svg');
+  --shadow: hsla(235, 19%, 80%, .5);
+  --body-bg: var(--neutral-white);
+  --item-bg: white;
+  --checkbox: var(--neutral-236-light);
+  --text-primary: var(--neutral-235-light);
+  --text-secondary: var(--neutral-236-dark);
+
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-image: url('/images/bg-desktop-light.jpg');
+  }
+}
