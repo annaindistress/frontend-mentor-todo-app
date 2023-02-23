@@ -1,0 +1,146 @@
+.tasks {
+  padding-inline: 24px;
+}
+
+.tasks__container {
+  max-width: 540px;
+  margin: 0 auto;
+  background-color: var(--item-bg);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+}
+
+.tasks__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tasks__item {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tasks__item:not(:first-of-type) {
+  border-block-start: 1px solid var(--border);
+}
+
+.tasks__input {
+  display: none;
+}
+
+.tasks__text {
+  position: relative;
+  flex-grow: 1;
+  padding-block: 16px;
+  padding-inline-start: 52px;
+  padding-inline-end: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.tasks__text::before,
+.tasks__text::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+}
+
+.tasks__text::before {
+  inset-block-start: 14px;
+  inset-inline-start: 20px;
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+}
+
+.tasks__text::after {
+  inset-block-start: 15px;
+  inset-inline-start: 21px;
+  display: none;
+  width: 18px;
+  height: 18px;
+  background-color: var(--item-bg);
+}
+
+.tasks__text:hover::before,
+.tasks__text:focus::before,
+.tasks__input:checked ~ .tasks__text::before {
+  background-image: var(--gradient);
+  border: 0
+}
+
+.tasks__text:hover::after,
+.tasks__text:focus::after {
+  display: block;
+}
+
+.tasks__input:checked ~ .tasks__text {
+  text-decoration: line-through;
+  color: var(--text-checked);
+}
+
+.tasks__input:checked ~ .tasks__text::after {
+  display: block;
+  background-color: transparent;
+  background-image: url('/images/icon-check.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 9px;
+}
+
+.tasks__delete {
+  flex-shrink: 0;
+  width: 32px;
+  height: 48px;
+  padding: 0;
+  background-color: transparent;
+  background-image: url('/images/icon-cross.svg');
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 12px;
+  border: 0;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+
+  .tasks {
+    padding-inline: 0;
+  }
+
+  .tasks__text {
+    padding-block: 20px;
+    padding-inline-start: 72px;
+  }
+
+  .tasks__text::before {
+    inset-block-start: 20px;
+    inset-inline-start: 24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .tasks__text::after {
+    inset-block-start: 21px;
+    inset-inline-start: 25px;
+    width: 22px;
+    height: 22px;
+  }
+
+  .tasks__delete {
+    width: 42px;
+    height: 64px;
+    background-size: 18px;
+    opacity: 0;
+  }
+
+  .tasks__item:hover .tasks__delete {
+    opacity: 1;
+  }
+}

@@ -9,9 +9,17 @@
   background-color: var(--body-bg);
 }
 
+.page__main {
+  margin-block-start: -28px;
+}
+
 @media (min-width: 768px) {
 
   .page {
     font-size: 18px;
+  }
+
+  .page__main {
+    margin-block-start: -54px;
   }
 }
