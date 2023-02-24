@@ -4,12 +4,14 @@
   --header-image: url('/images/bg-mobile-dark.jpg');
   --toggle-icon: url('/images/icon-sun.svg');
   --shadow: 0 35px 50px -15px hsla(0, 0, 0, .5);
-  --body-bg: var(--neutral-235-dark);
-  --item-bg: var(--neutral-235-medium);
-  --border: var(--neutral-237-medium);
-  --text-primary: var(--neutral-234-light);
-  --text-secondary: var(--neutral-234-dark);
-  --text-checked: var(--neutral-233-dark);
+  --body-bg: hsl(235, 21%, 11%);
+  --item-bg: hsl(235, 24%, 19%);
+  --border: hsl(237, 14%, 26%);
+  --text-primary: hsl(234, 39%, 85%);
+  --text-secondary: hsl(234, 11%, 52%);
+  --text-checked: hsl(233, 14%, 35%);
+  --text-filter: hsl(235, 16%, 43%);
+  --text-filter-hover: hsl(236, 32%, 92%);
 }
 
 @media (min-width: 768px) {

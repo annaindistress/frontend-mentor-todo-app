@@ -4,12 +4,14 @@
   --header-image: url('/images/bg-mobile-light.jpg');
   --toggle-icon: url('/images/icon-moon.svg');
   --shadow: 0 35px 50px -15px hsla(235, 19%, 80%, .5);
-  --body-bg: var(--neutral-white);
+  --body-bg: hsl(0, 0%, 98%);
   --item-bg: white;
-  --border: var(--neutral-236-light);
-  --text-primary: var(--neutral-235-light);
-  --text-secondary: var(--neutral-236-dark);
-  --text-checked: var(--neutral-233-light);
+  --border: hsl(236, 33%, 92%);
+  --text-primary: hsl(235, 19%, 35%);
+  --text-secondary: hsl(236, 9%, 61%);
+  --text-checked: hsl(233, 11%, 84%);
+  --text-filter: hsl(235, 9%, 61%);
+  --text-filter-hover: var(--text-primary);
 }
 
 @media (min-width: 768px) {

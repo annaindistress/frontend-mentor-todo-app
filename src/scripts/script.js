@@ -1,5 +1,38 @@
 'use strict';
 
+const TEST_DATA = [
+  {
+    checked: false,
+    id: 1,
+    content: 'Complete Todo App on Frontend Mentor',
+  },
+  {
+    checked: false,
+    id: 2,
+    content: 'Pick up groceries',
+  },
+  {
+    checked: false,
+    id: 3,
+    content: 'Read for 1 hour',
+  },
+  {
+    checked: false,
+    id: 4,
+    content: '10 minutes meditation',
+  },
+  {
+    checked: false,
+    id: 5,
+    content: 'Jog around the park 3x',
+  },
+  {
+    checked: true,
+    id: 6,
+    content: 'Complete online JavaScript course',
+  },
+];
+
 class Task {
   checked = false;
   id = (Date.now() + '').slice(-10);
@@ -16,6 +49,9 @@ const darkThemeStyles = document.head.querySelector(
 const formElement = document.querySelector('.header__form');
 const inputElement = document.querySelector('.header__input');
 const taskListElement = document.querySelector('.tasks__list');
+const taskFooterElement = document.querySelector('.tasks__footer');
+const taskFilterElement = document.querySelector('.tasks__filter');
+const taskAmountElement = document.querySelector('.tasks__amount');
 
 class App {
   #colorTheme;
@@ -29,6 +65,11 @@ class App {
     formElement.addEventListener('submit', this._newTask.bind(this));
     taskListElement.addEventListener('click', this._deleteTask.bind(this));
     taskListElement.addEventListener('change', this._checkTask.bind(this));
+    taskFooterElement.addEventListener(
+      'click',
+      this._deleteCompleted.bind(this)
+    );
+    taskFilterElement.addEventListener('change', this._filterTasks.bind(this));
     themeToggle.addEventListener('click', this._changeTheme.bind(this));
   }
 
@@ -41,6 +82,7 @@ class App {
     this.#tasks.push(task);
     this._renderTask(task);
     this._setTasks();
+    this._toggleFilter();
   }
 
   _renderTask(task) {
@@ -59,6 +101,7 @@ class App {
     `;
 
     taskListElement.insertAdjacentHTML('afterbegin', html);
+    this._renderActiveAmount();
   }
 
   _checkTask(evt) {
@@ -67,6 +110,7 @@ class App {
 
     const task = this.#tasks.find(task => task.id === input.id);
     task.checked = !task.checked;
+    this._renderActiveAmount();
     this._setTasks();
   }
 
@@ -79,6 +123,47 @@ class App {
     this._setTasks();
 
     button.parentElement.remove();
+    this._toggleFilter();
+  }
+
+  _deleteCompleted(evt) {
+    const button = evt.target.closest('.tasks__clear');
+    if (!button) return;
+
+    this.#tasks.forEach(task => {
+      if (task.checked) {
+        document.getElementById(`${task.id}`).parentNode.remove();
+      }
+    });
+
+    this.#tasks = this.#tasks.filter(task => !task.checked);
+    this._setTasks();
+  }
+
+  _filterTasks(evt) {
+    const filterType = evt.target.closest('.filter__radio').value;
+    if (!filterType) return;
+
+    const taskElements = document.querySelectorAll('.tasks__item');
+    taskElements.forEach(elem => elem.remove());
+
+    switch (filterType) {
+      case 'active': {
+        this.#tasks
+          .filter(task => !task.checked)
+          .forEach(task => this._renderTask(task));
+        break;
+      }
+      case 'completed': {
+        this.#tasks
+          .filter(task => task.checked)
+          .forEach(task => this._renderTask(task));
+        break;
+      }
+      default: {
+        this.#tasks.forEach(task => this._renderTask(task));
+      }
+    }
   }
 
   _setTasks() {
@@ -87,9 +172,29 @@ class App {
 
   _getTasks() {
     const data = JSON.parse(localStorage.getItem('tasks'));
-    if (!data) return;
-    this.#tasks = data;
+    if (!data) {
+      this.#tasks = TEST_DATA;
+    } else {
+      this.#tasks = data;
+    }
     this.#tasks.forEach(task => this._renderTask(task));
+    this._toggleFilter();
+  }
+
+  _renderActiveAmount() {
+    let activeTasks = 0;
+    this.#tasks.forEach(task => !task.checked && activeTasks++);
+    taskAmountElement.textContent = `${activeTasks} items left`;
+  }
+
+  _toggleFilter() {
+    if (this.#tasks.length === 0) {
+      taskFooterElement.classList.add('tasks__footer--hidden');
+      taskFilterElement.classList.add('filter--hidden');
+    } else {
+      taskFooterElement.classList.remove('tasks__footer--hidden');
+      taskFilterElement.classList.remove('filter--hidden');
+    }
   }
 
   _applyTheme() {
