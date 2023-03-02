@@ -16,6 +16,10 @@
   list-style: none;
 }
 
+.tasks__list:not(:empty) {
+  border-block-end: 1px solid var(--border);
+}
+
 .tasks__item {
   display: flex;
   flex-wrap: nowrap;
@@ -116,7 +120,6 @@
   padding: 20px;
   padding-block-start: 16px;
   color: var(--text-filter);
-  border-block-start: 1px solid var(--border);
 }
 
 .tasks__footer--hidden {
@@ -143,6 +146,17 @@
 
 .tasks__filter {
   margin: 0;
+  margin-block-end: 40px;
+}
+
+.task__instruction {
+  font-size: 14px;
+  text-align: center;
+  color: var(--text-filter);
+}
+
+.task__instruction--hidden {
+  display: none;
 }
 
 @media (min-width: 768px) {
@@ -199,5 +213,6 @@
 
   .tasks__filter {
     margin-block-start: -54px;
+    margin-block-end: 50px;
   }
 }
