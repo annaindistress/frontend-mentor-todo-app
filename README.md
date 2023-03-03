@@ -3,6 +3,9 @@
 This is a solution to the [todo app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
 - [The challenge](#the-challenge)
+- [Screenshot](#screenshot)
+- [Links](#links)
+- [Built with](#built-with)
 - [Author](#author)
 
 ## The challenge
@@ -18,6 +21,25 @@ Users should be able to:
 - Clear all completed todos
 - Toggle light and dark mode
 - **Bonus**: Drag and drop to reorder items on the list
+
+## Screenshot
+
+![](./screenshot.png)
+
+## Links
+
+- [Solution URL](https://github.com/annaindistress/frontend-mentor-todo-app)
+- [Live Site URL](https://annaindistress.github.io/frontend-mentor-todo-app/)
+
+## Built with
+
+- Semantic HTML5 markup
+- CSS custom properties
+- Flexbox
+- PostCSS
+- Mobile-first workflow
+- Vanilla JavaScript
+- Vite
 
 ## Author
 
