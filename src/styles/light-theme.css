@@ -6,6 +6,7 @@
   --shadow: 0 35px 50px -15px hsla(235, 19%, 80%, .5);
   --body-bg: hsl(0, 0%, 98%);
   --item-bg: white;
+  --item-bg-dragged-over: hsl(0, 0%, 95%);
   --border: hsl(236, 33%, 92%);
   --text-primary: hsl(235, 19%, 35%);
   --text-secondary: hsl(236, 9%, 61%);

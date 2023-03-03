@@ -60,6 +60,8 @@ class Task {
 class App {
   #colorTheme;
   #tasks = [];
+  #draggableElementOrder = null;
+  #draggableElementHeight = 0;
 
   constructor() {
     this._getColorTheme();
@@ -113,10 +115,10 @@ class App {
   _getTasks() {
     let data = JSON.parse(localStorage.getItem('tasks'));
     if (!data) data = TEST_DATA;
-    data.forEach(item => {
+    data.forEach((item, index) => {
       const task = new Task(item.content, item.id, item.checked);
       this.#tasks.push(task);
-      this._renderTask(task);
+      this._renderTask(task, index);
     });
     this._setTasks();
     this._toggleFilter();
@@ -127,10 +129,11 @@ class App {
     localStorage.setItem('tasks', JSON.stringify(this.#tasks));
   }
 
-  _renderTask(task) {
+  _renderTask(task, order) {
     const li = document.createElement('li');
     li.classList.add('tasks__item');
-    li.setAttribute('draggable', true);
+    li.draggable = true;
+    li.dataset.order = order;
     li.innerHTML = `
       <input class="tasks__input" type="checkbox" name="task-item" id="${
         task.id
@@ -144,6 +147,12 @@ class App {
     `;
 
     taskListElement.prepend(li);
+
+    li.addEventListener('dragstart', this._handleDragStart.bind(this));
+    li.addEventListener('dragend', this._handleDragEnd.bind(this));
+    li.addEventListener('dragover', this._handleDragOver.bind(this));
+    li.addEventListener('dragleave', this._handleDragLeave.bind(this));
+    li.addEventListener('drop', this._handleDragDrop.bind(this));
   }
 
   _toggleFilter() {
@@ -175,17 +184,17 @@ class App {
       case 'active': {
         this.#tasks
           .filter(task => !task.checked)
-          .forEach(task => this._renderTask(task));
+          .forEach((task, index) => this._renderTask(task, index));
         break;
       }
       case 'completed': {
         this.#tasks
           .filter(task => task.checked)
-          .forEach(task => this._renderTask(task));
+          .forEach((task, index) => this._renderTask(task, index));
         break;
       }
       default: {
-        this.#tasks.forEach(task => this._renderTask(task));
+        this.#tasks.forEach((task, index) => this._renderTask(task, index));
       }
     }
   }
@@ -197,7 +206,7 @@ class App {
     inputElement.value = '';
     const task = new Task(content);
     this.#tasks.push(task);
-    this._renderTask(task);
+    this._renderTask(task, this.#tasks.length - 1);
     this._setTasks();
     this._toggleFilter();
     this._renderActiveAmount();
@@ -236,6 +245,58 @@ class App {
 
     this.#tasks = this.#tasks.filter(task => !task.checked);
     this._toggleFilter();
+    this._setTasks();
+  }
+
+  _handleDragStart(evt) {
+    this.#draggableElementOrder = evt.target.dataset.order;
+    this.#draggableElementHeight = evt.target.offsetHeight;
+    taskListElement.style.height = taskListElement.offsetHeight + 'px';
+    setTimeout(() => {
+      evt.target.style.display = 'none';
+    }, 0);
+    taskListElement.style.height =
+      taskListElement.offsetHeight - this.#draggableElementHeight + 'px';
+  }
+
+  _handleDragEnd(evt) {
+    evt.target.style.display = 'flex';
+    taskListElement.style.height =
+      taskListElement.offsetHeight + this.#draggableElementHeight + 'px';
+  }
+
+  _handleDragOver(evt) {
+    evt.preventDefault();
+    if (evt.target.parentElement.classList.contains('tasks__item'))
+      evt.target.parentElement.classList.add('tasks__item--dragged-over');
+    if (evt.target.classList.contains('tasks__item'))
+      evt.target.classList.add('tasks__item--dragged-over');
+  }
+
+  _handleDragLeave(evt) {
+    if (evt.target.parentElement.classList.contains('tasks__item'))
+      evt.target.parentElement.classList.remove('tasks__item--dragged-over');
+    if (evt.target.classList.contains('tasks__item'))
+      evt.target.classList.remove('tasks__item--dragged-over');
+  }
+
+  _handleDragDrop(evt) {
+    this._handleDragLeave(evt);
+    if (evt.target.parentElement.classList.contains('tasks__item')) {
+      const target = evt.target.parentElement.dataset.order;
+      this._changeTasksOrder(target);
+    }
+  }
+
+  _changeTasksOrder(target) {
+    const current = this.#draggableElementOrder;
+    const currentTask = this.#tasks[current];
+
+    this.#tasks.splice(current, 1);
+    this.#tasks.splice(target, 0, currentTask);
+
+    taskListElement.innerHTML = '';
+    this.#tasks.forEach((task, index) => this._renderTask(task, index));
     this._setTasks();
   }
 }

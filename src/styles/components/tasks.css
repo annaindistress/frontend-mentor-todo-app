@@ -14,6 +14,8 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  transition: .3s ease;
+  overflow: hidden;
 }
 
 .tasks__list:not(:empty) {
@@ -25,10 +27,16 @@
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
+  transition: height .3s ease;
+  cursor: move;
 }
 
-.tasks__item:not(:first-of-type) {
-  border-block-start: 1px solid var(--border);
+.tasks__item:not(:last-of-type) {
+  border-block-end: 1px solid var(--border);
+}
+
+.tasks__item--dragged-over {
+  background-color: var(--item-bg-dragged-over);
 }
 
 .tasks__input {
