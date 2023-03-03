@@ -143,7 +143,7 @@ class App {
     li.innerHTML = `
       <input class="tasks__input" type="checkbox" name="task-item" id="${
         task.id
-      }" ${task.checked && 'checked'}>
+      }" ${task.checked ? 'checked' : ''}>
       <label class="tasks__text" for="${task.id}" tabindex="0">${
       task.content
     }</label>
