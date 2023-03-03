@@ -9,6 +9,6 @@ export default defineConfig({
       ],
     },
   },
-  base: '/frontend-mentor-bookmark-landing-page/',
+  base: '/frontend-mentor-todo-app/',
   root: 'src',
 });
