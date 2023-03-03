@@ -1,8 +1,8 @@
 :root {
   color-scheme: dark;
   --header-bg: hsl(267, 99%, 38%);
-  --header-image: url('/images/bg-mobile-dark.jpg');
-  --toggle-icon: url('/images/icon-sun.svg');
+  --header-image: var(--header-bg-dark-mobile);
+  --toggle-icon: var(--header-icon-dark);
   --shadow: 0 35px 50px -15px hsla(0, 0, 0, .5);
   --body-bg: hsl(235, 21%, 11%);
   --item-bg: hsl(235, 24%, 19%);
@@ -17,6 +17,7 @@
 
 @media (min-width: 768px) {
   :root {
-    --header-image: url('/images/bg-desktop-dark.jpg');
+    color-scheme: dark;
+    --header-image: var(--header-bg-dark-desktop);
   }
 }

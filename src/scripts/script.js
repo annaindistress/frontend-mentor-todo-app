@@ -33,10 +33,8 @@ const TEST_DATA = [
   },
 ];
 
+const docStyles = document.head.querySelector('link[rel=stylesheet]');
 const themeToggle = document.querySelector('.header__theme-toggle');
-const darkThemeStyles = document.head.querySelector(
-  'link[rel=stylesheet][media*=prefers-color-scheme][media*=dark]'
-);
 const formElement = document.querySelector('.header__form');
 const inputElement = document.querySelector('.header__input');
 const taskListElement = document.querySelector('.tasks__list');
@@ -64,6 +62,12 @@ class App {
   #draggableElementHeight = 0;
 
   constructor() {
+    const darkThemeElement = document.createElement('link');
+    darkThemeElement.rel = 'stylesheet';
+    darkThemeElement.href = './dark-theme.css';
+    darkThemeElement.media = '(prefers-color-scheme: dark)';
+    docStyles.after(darkThemeElement);
+
     this._getColorTheme();
     this._getTasks();
 
@@ -94,6 +98,9 @@ class App {
       light: 'not all',
       dark: 'all',
     };
+    const darkThemeStyles = document.head.querySelector(
+      'link[rel=stylesheet][href$="dark-theme.css"]'
+    );
     darkThemeStyles.media = darkThemeMediaMap[this.#colorTheme];
   }
 
@@ -107,7 +114,6 @@ class App {
       newTheme = this.#colorTheme === 'dark' ? 'light' : 'dark';
     }
     this.#colorTheme = newTheme;
-    console.log(this.#colorTheme);
     this._setСolorTheme();
     this._applyColorTheme();
   }

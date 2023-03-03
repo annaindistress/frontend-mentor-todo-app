@@ -12,4 +12,10 @@
   color-scheme: light dark;
   --primary-blue: hsl(220, 98%, 61%);
   --gradient: linear-gradient(135deg, hsl(192, 100%, 67%) 0%, hsl(280, 87%, 65%) 100%);
+  --header-bg-light-mobile: url('/images/bg-mobile-light.jpg');
+  --header-bg-light-desktop: url('/images/bg-desktop-light.jpg');
+  --header-icon-light: url('/images/icon-moon.svg');
+  --header-bg-dark-mobile: url('/images/bg-mobile-dark.jpg');
+  --header-bg-dark-desktop: url('/images/bg-desktop-dark.jpg');
+  --header-icon-dark: url('/images/icon-sun.svg');
 }

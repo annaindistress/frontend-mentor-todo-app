@@ -1,8 +1,8 @@
 :root {
   color-scheme: light;
   --header-bg: hsl(249, 99%, 64%);
-  --header-image: url('/images/bg-mobile-light.jpg');
-  --toggle-icon: url('/images/icon-moon.svg');
+  --header-image: var(--header-bg-light-mobile);
+  --toggle-icon: var(--header-icon-light);
   --shadow: 0 35px 50px -15px hsla(235, 19%, 80%, .5);
   --body-bg: hsl(0, 0%, 98%);
   --item-bg: white;
@@ -17,6 +17,7 @@
 
 @media (min-width: 768px) {
   :root {
-    --header-image: url('/images/bg-desktop-light.jpg');
+    color-scheme: light;
+    --header-image: var(--header-bg-light-desktop);
   }
 }
