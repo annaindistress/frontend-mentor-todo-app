@@ -2,7 +2,7 @@
 
 set -e
 npm run build
-cd dist
+cd src/dist
 echo > .nojekyll
 
 git init
